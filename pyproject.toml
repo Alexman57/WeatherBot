@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "weather-bot-py"
+version = "1"
+description = "vkr_py_project"
+authors = ["Alex"]
+license = "no"
+readme = "README.md"
+packages = [{include = "weather_bot_py"}]
+
+[tool.poetry.dependencies]
+python = "3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

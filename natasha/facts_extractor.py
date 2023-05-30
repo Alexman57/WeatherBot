@@ -1,8 +1,5 @@
 from typing import List
 from datetime import date
-import natasha
-
-from installer.sources import WheelSource
 
 from natasha import (
     Doc,
@@ -14,19 +11,19 @@ from natasha import (
     NewsNERTagger,
     DatesExtractor,
 )
-
 from natasha.extractors import Match
-from natasha.helpers import find_dates_as_word, parse_natasha_date_to_datetime
+from natasha_utils.helpers import find_dates_as_word, parse_natasha_date_to_datetime
 
 segmenter = Segmenter()
 morph_vocab = MorphVocab()
+
 emb = NewsEmbedding()
 morph_tagger = NewsMorphTagger(emb)
-
 syntax_parser = NewsSyntaxParser(emb)
 ner_tagger = NewsNERTagger(emb)
 
 dates_extractor = DatesExtractor(morph_vocab)
+
 
 class NatashaExtractor:
     def __init__(self, text: str):

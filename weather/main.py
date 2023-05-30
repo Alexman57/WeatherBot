@@ -2,7 +2,7 @@ import telebot
 from telebot import types
 
 from Constants import BOT_TOKEN
-from get_city_coords import get_coords , get_city
+from get_city_coords import get_coords, get_city
 from get_weather import get_weather_open, get_weather_yandex
 
 #from natasha import NatashaExtractor

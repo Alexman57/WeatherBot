@@ -4,7 +4,6 @@ import requests
 from Constants import OPEN_WEATHER_API_TOKEN, YANDEX_WEATHER_API_TOKEN
 
 
-
 def get_weather_yandex(latitude, longitude):
     url = f"https://api.weather.yandex.ru/v2/forecast?lat={latitude}&lon={longitude}"
     headers = {"X-Yandex-API-Key": YANDEX_WEATHER_API_TOKEN}

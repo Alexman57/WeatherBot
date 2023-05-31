@@ -12,7 +12,7 @@ from natasha import (
     DatesExtractor,
 )
 from natasha.extractors import Match
-from natasha_utils.helpers import find_dates_as_word, parse_natasha_date_to_datetime
+from natasha.helpers import find_dates_as_word, parse_natasha_date_to_datetime
 
 segmenter = Segmenter()
 morph_vocab = MorphVocab()

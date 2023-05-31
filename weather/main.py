@@ -3,9 +3,10 @@ from telebot import types
 
 from Constants import BOT_TOKEN
 from get_city_coords import get_coords, get_city
-from get_weather import get_weather_open, get_weather_yandex
+from get_weather import get_weather_open, get_weather_yandex, get_weather_accum
+from pretty_message import pretty_message
 
-#from natasha import NatashaExtractor
+from natasha import NatashaExtractor
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -34,17 +35,22 @@ def get_location(message):
     bot.send_message(message.chat.id, get_weather_open(current_position[1], current_position[0]), parse_mode='html')
     bot.send_message(message.chat.id, get_weather_yandex(current_position[1], current_position[0]), parse_mode='html')
 
-    #user_text_info = NatashaExtractor(simple_text)
-    #locations_nat = user_text_info.find_locations()
-    #print(locations_nat)
+    user_text_info = NatashaExtractor(simple_text)
+    locations_nat = user_text_info.find_locations()
+    print(locations_nat)
 
 
 @bot.message_handler(content_types=['text'])
 def get_weather(message):
     bot.send_message(message.chat.id, f'City: {message.text}', parse_mode='html')
     current_position = get_coords(message.text)
+
+    print(current_position)
+    forecast = get_weather_accum(current_position[0], current_position[1])
     bot.send_message(message.chat.id, get_weather_open(current_position[0], current_position[1]), parse_mode='html')
     bot.send_message(message.chat.id, get_weather_yandex(current_position[0], current_position[1]), parse_mode='html')
+    #как надо отправялть сообщения
+    bot.send_message(message.chat.id, pretty_message(message.text, forecast), parse_mode='HTML', disable_web_page_preview=True)
 
 
 def clear_KeyBoard():

@@ -1,7 +1,9 @@
 import json
 import requests
+from array import *
+from custom_typings import ForecastType
 
-from Constants import OPEN_WEATHER_API_TOKEN, YANDEX_WEATHER_API_TOKEN
+from Constants import OPEN_WEATHER_API_TOKEN, YANDEX_WEATHER_API_TOKEN, ACUU_WEATHER_API_TOKEN
 
 
 def get_weather_yandex(latitude, longitude):
@@ -48,3 +50,30 @@ def get_weather_open(latitude, longitude):
         return weather_massage
     else:
         return 'Problems on weather OpenWeather API'
+
+
+def get_weather_accum(latitude, longitude) -> ForecastType:
+    res = requests.get(
+        f'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey={ACUU_WEATHER_API_TOKEN}&q={latitude}%2C%20{longitude}')
+
+    #доделать. data это list
+    if res.status_code == 200:
+        data = json.loads(res.text)
+        loc_key = data["Key"]
+        res = requests.get(
+            f"http://dataservice.accuweather.com/currentconditions/v1/{loc_key}?apikey={ACUU_WEATHER_API_TOKEN}&language=ru&details=true").json()
+        temp = res[0]["Temperature"]["Metric"]['Value']
+        feel_like = res[0]["RealFeelTemperature"]["Metric"]['Value']
+        text = res[0]["RealFeelTemperature"]["Metric"]["Phrase"]
+        wind_speed = res[0]["Wind"]["Speed"]["Metric"]['Value']
+        weather_text = res[0]["WeatherText"]
+        #weather_accum_data = [temp, feel_like, wind_speed, weather_text]
+       # print(weather_accum_data)
+        forecast = ForecastType()
+        forecast["temp"] = temp
+        forecast["fl"] = feel_like
+        forecast["wind_speed"] = wind_speed
+        forecast["description"] = weather_text
+        return forecast
+    else:
+        print("error accum")

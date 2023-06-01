@@ -3,7 +3,7 @@ import requests
 from array import *
 from custom_typings import ForecastType
 
-from Constants import OPEN_WEATHER_API_TOKEN, YANDEX_WEATHER_API_TOKEN, ACUU_WEATHER_API_TOKEN
+from Constants import OPEN_WEATHER_API_TOKEN, YANDEX_WEATHER_API_TOKEN, ACUU_WEATHER_API_TOKEN, WEATHER_API
 
 
 def get_weather_yandex(latitude, longitude):
@@ -77,3 +77,23 @@ def get_weather_accum(latitude, longitude) -> ForecastType:
         return forecast
     else:
         print("error accum")
+
+
+def get_weather_api(latitude, longitude) -> ForecastType:
+    res = requests.get(
+        f'https://api.weatherapi.com/v1/current.json?key={WEATHER_API}&q={latitude},{longitude}&aqi=no')
+
+    if res.status_code == 200:
+        forecast = ForecastType()
+        data = json.loads(res.text)
+        temp = data["current"]["temp_c"]
+        feel_like = data["current"]["feelslike_c"]
+        wind_speed = data["current"]["wind_kph"]
+        weather_text = data["current"]["condition"]["text"]
+        forecast["temp"] = temp
+        forecast["fl"] = feel_like
+        forecast["wind_speed"] = wind_speed
+        forecast["description"] = weather_text
+        return forecast
+    else:
+        print("weather error")

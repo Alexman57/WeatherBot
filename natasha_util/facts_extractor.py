@@ -11,8 +11,9 @@ from natasha import (
     NewsNERTagger,
     DatesExtractor,
 )
+
 from natasha.extractors import Match
-from natasha.helpers import find_dates_as_word, parse_natasha_date_to_datetime
+from natasha_util.helpers import find_dates_as_word, parse_natasha_date_to_datetime
 
 segmenter = Segmenter()
 morph_vocab = MorphVocab()

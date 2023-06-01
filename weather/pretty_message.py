@@ -3,14 +3,11 @@ from custom_typings import ForecastType
 
 
 def pretty_message(city: str, forecast: ForecastType) -> str:
-    #main_info = forecast["main"]
     temperature = forecast["temp"]
     feels_like = forecast["fl"]
-    #humidity = main_info["humidity"]
-
     wind_speed = forecast['wind_speed']
     description = forecast['description']
-    #rain_prop = forecast['pop']
+    # humidity = main_info["humidity"]
 
 
     return \
@@ -28,4 +25,3 @@ def pretty_message(city: str, forecast: ForecastType) -> str:
 
 # <b>Вероятность осадков:</b> {rain_prop}
 # <b>Влажность:</b> {humidity} %
-# <b>Описание:</b> {description} м/с

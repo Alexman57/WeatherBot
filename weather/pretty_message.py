@@ -21,7 +21,7 @@ def pretty_message(city: str, forecast: ForecastType) -> str:
 <b>Температура воздуха</b> {temperature} °C
 <b>Ощущается как:</b> {feels_like} °C
 <b>Скорость ветра:</b> {wind_speed} м/с
-<b>Описание:</b> {description} м/с
+<b>Описание:</b> {description}
 –––––––––––––––––––––\n
 <b>Данные:</b> <a href="https://openweathermap.org/forecast5">{source}</a>
         """

@@ -3,12 +3,15 @@ from custom_typings import ForecastType
 
 
 def pretty_message(city: str, forecast: ForecastType) -> str:
-    temperature = forecast["temp"]
-    feels_like = forecast["fl"]
-    wind_speed = forecast['wind_speed']
-    description = forecast['description']
-    # humidity = main_info["humidity"]
-
+    if forecast is None:
+        return "error"
+    else:
+        temperature = forecast["temp"]
+        feels_like = forecast["fl"]
+        wind_speed = forecast['wind_speed']
+        description = forecast['description']
+        source = forecast["source"]
+        # humidity = main_info["humidity"]
 
     return \
         f"""
@@ -20,7 +23,7 @@ def pretty_message(city: str, forecast: ForecastType) -> str:
 <b>Скорость ветра:</b> {wind_speed} м/с
 <b>Описание:</b> {description} м/с
 –––––––––––––––––––––\n
-<b>Данные:</b> <a href="https://openweathermap.org/forecast5">Open Weather API</a>
+<b>Данные:</b> <a href="https://openweathermap.org/forecast5">{source}</a>
         """
 
 # <b>Вероятность осадков:</b> {rain_prop}

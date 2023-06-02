@@ -3,7 +3,7 @@ from telebot import types
 
 from Constants import BOT_TOKEN
 from get_city_coords import get_coords, get_city
-from get_weather import get_weather_open, get_weather_yandex, get_weather_accum, get_weather_api
+from get_weather import get_open_weather, get_weather_yandex, get_weather_accum, get_weather_api
 from pretty_message import pretty_message
 from natasha_util import NatashaExtractor
 
@@ -38,7 +38,7 @@ def get_location(message):
                      pretty_message(city_name, get_weather_api(current_position[0], current_position[1])),
                      parse_mode='HTML', disable_web_page_preview=True)
     bot.send_message(message.chat.id,
-                     pretty_message(city_name, get_weather_open(current_position[0], current_position[1])),
+                     pretty_message(city_name, get_open_weather(current_position[0], current_position[1])),
                      parse_mode='HTML', disable_web_page_preview=True)
     bot.send_message(message.chat.id,
                      pretty_message(city_name, get_weather_yandex(current_position[0], current_position[1])),
@@ -61,7 +61,7 @@ def get_weather(message):
                      pretty_message(city_name, get_weather_api(current_position[0], current_position[1])),
                      parse_mode='HTML', disable_web_page_preview=True)
     bot.send_message(message.chat.id,
-                     pretty_message(city_name, get_weather_open(current_position[0], current_position[1])),
+                     pretty_message(city_name, get_open_weather(current_position[0], current_position[1])),
                      parse_mode='HTML', disable_web_page_preview=True)
     bot.send_message(message.chat.id,
                      pretty_message(city_name, get_weather_yandex(current_position[0], current_position[1])),

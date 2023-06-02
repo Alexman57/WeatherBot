@@ -7,3 +7,4 @@ class ForecastType(TypedDict):
     wind_speed: float
     humidity: float
     description: str
+    source: str

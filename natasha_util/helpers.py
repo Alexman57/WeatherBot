@@ -15,6 +15,11 @@ def find_dates_as_word(text: str) -> List[date]:
         dates_as_word.append(today + timedelta(days=2))
     elif re.compile(r'завтра', re.IGNORECASE).search(text):
         dates_as_word.append(today + timedelta(days=1))
+    elif re.compile(r'неделю', re.IGNORECASE).search(text):
+        dates_as_word.append(today + timedelta(days=7))
+    elif re.compile(r'вчера', re.IGNORECASE).search(text):
+        dates_as_word.append(today + timedelta(days=-1))
+
 
     return dates_as_word
 
